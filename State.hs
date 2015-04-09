@@ -14,30 +14,30 @@ newtype State s a = State (s -> (a, s))
 
 -- Now define its instances
 instance Functor (State s) where
-  fmap = undefined
+  fmap = todo
 
 instance Applicative (State s) where
-  pure  = undefined
+  pure  = todo
   (<*>) = ap
 
 instance Monad (State s) where
   return = pure
-  (>>=) = undefined
+  (>>=) = todo
 
 -- We can use this type to write what looks like imperative programs.
 -- First define the following functions:
 
 get :: State s s
-get = undefined
+get = todo
 
 put :: s -> State s ()
-put = undefined
+put = todo
 
 modify :: (s -> s) -> State s ()
-modify f = undefined
+modify f = todo
 
 runState :: State s a -> s -> (a, s)
-runState = undefined
+runState = todo
 
 -------------------------------------------------------------------------------
 -- For instance we might write a little 'language' for describing the movement
@@ -65,30 +65,33 @@ move f = do
 
 -- | Rewrite the do-notation above to explicitly use (>>=) and (>>)
 move' :: (Pos -> Pos) -> Game ()
-move' = undefined
+move' = todo
 
 -- | Define the following functions using move above
 moveRight :: Game ()
-moveRight = undefined
+moveRight = todo
 
 moveLeft :: Game ()
-moveLeft = undefined
+moveLeft = todo
 
 moveUp :: Game ()
-moveUp = undefined
+moveUp = todo
 
 moveDown :: Game ()
-moveDown = undefined
+moveDown = todo
 
 -- | Write a program that moves the character in a square with side 'n' in
 -- steps of 1, returning to the initial position.
 -- Hint: use move{Right,Left,Up,Down} and the following function (if you want):
 -- replicateM_ :: Monad m => Int -> m a -> m ()
 square :: Int -> Game ()
-square n = undefined
+square n = todo
 
 -- | Test the square function using this:
 test :: ((), GameState)
 test = runState (square 4) initialGameState
   where
     initialGameState = GameState (0, 0) []
+
+todo :: a
+todo = undefined

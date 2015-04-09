@@ -12,7 +12,7 @@ data Tree a = Leaf a | Fork (Tree a) (Tree a)
 
 instance Foldable Tree where
   -- foldMap :: Monoid m => (a -> m) -> Tree a -> m
-  foldMap f t = undefined
+  foldMap f t = todo
 
 exampleTree, exampleTree2 :: Tree Int
 exampleTree = Leaf 1 `Fork` ((Leaf 2 `Fork` Leaf 3) `Fork` Leaf 4)
@@ -21,14 +21,14 @@ exampleTree2 = Leaf 0 `Fork` (exampleTree `Fork` Leaf 0)
 -- | Define the following function in terms of foldMap. Note that it
 -- also exists in the Foldable class as 'toList'.
 elements :: Tree a -> [a]
-elements = undefined
+elements = todo
 
 test :: [Int]
 test = elements exampleTree
 
 instance Traversable Tree where
   -- traverse :: Applicative f => (a -> f b) -> Tree a -> f (Tree b)
-  traverse f t = undefined
+  traverse f t = todo
 
 {- What can we do with traverse?
 
@@ -77,3 +77,6 @@ stateTraversal = runState (traverse f exampleTree2) []
       else do
         put (x:xs)
         return False
+
+todo :: a
+todo = undefined
