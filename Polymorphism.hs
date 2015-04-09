@@ -1,7 +1,7 @@
 -- | Let's redefine some of the standard typeclasses and make instances for
 -- practice!
 --
--- Exercise: Replace the 'undefined's with actual definitions.
+-- Exercise: Replace the 'todo's with actual definitions.
 module Polymorphism where
 
 -- | Hide (by selectively importing) some stuff from the standard prelude so we
@@ -10,7 +10,7 @@ module Polymorphism where
 -- This is non-standard and just to be able to redefine stuff on our own.
 import Prelude
   (Eq((==)), Ord((<=)), Show, Bool, Int, Integer, Maybe(Just, Nothing),
-  Num((+), (-)), (++), (&&), fromInteger, undefined, (.))
+  Num((+), (-)), (++), (&&), fromInteger, (.))
 
 -------------------------------------------------------------------------------
 -- * Ordinary *-kinded polymorphism
@@ -70,19 +70,19 @@ instance Monoid [a] where
   mempty  = []
 
 instance Semigroup (Tree a) where
-  t <> t' = undefined
+  t <> t' = todo
 
 prop_tree_append_assoc :: Tree Int -> Tree Int -> Tree Int -> Bool
 prop_tree_append_assoc a b c = a <> (b <> c) == (a <> b) <> c
 
 instance Semigroup (Tree' a) where
-  t <> t' = undefined
+  t <> t' = todo
 
 prop_tree'_append_assoc :: Tree' Int -> Tree' Int -> Tree' Int -> Bool
 prop_tree'_append_assoc a b c = a <> (b <> c) == (a <> b) <> c
 
 instance Monoid (Tree a) where
-  mempty  = undefined
+  mempty  = todo
 
 -- EXERCISE: Is (Tree' a) a Monoid? Why (not)?
 
@@ -95,11 +95,11 @@ prop_mempty t = t == mempty <> t
 --   instance, whose definition is ..."
 instance Semigroup b => Semigroup (a -> b) where
   -- (<>) :: Semigroup b => (a -> b) -> (a -> b) -> (a -> b)
-  f <> g = undefined
+  f <> g = todo
 
 instance Monoid b => Monoid (a -> b) where
   -- mempty :: Monoid b => a -> b
-  mempty = undefined
+  mempty = todo
 
 {- EXERCISE:
 
@@ -121,7 +121,7 @@ instance Monoid b => Monoid (a -> b) where
 -}
 
 instance Semigroup a => Semigroup (Maybe a) where
-  (<>) = undefined
+  (<>) = todo
 
 instance Monoid a => Monoid (Maybe a) where
   -- | You have two possible choices for mempty. The following is what the
@@ -149,14 +149,14 @@ instance Functor Maybe where
   fmap f (Just x) = Just (f x)
 
 instance Functor Tree where
-  fmap f t = undefined
+  fmap f t = todo
 
 instance Functor Tree' where
-  fmap f t = undefined
+  fmap f t = todo
 
 instance Functor ((->) x) where
   -- fmap :: (a -> b) -> (x -> a) -> x -> b
-  fmap f g = undefined
+  fmap f g = todo
 
 -- | This is normally imported from Control.Applicative
 class Applicative f where
@@ -173,20 +173,20 @@ instance Applicative [] where
 -- can do with what you've got.
 
 instance Applicative Tree where
-  pure x = undefined
+  pure x = todo
   (<*>)  = ap -- sometimes it's more straightforward to define Monad first and
               -- define the applicative in terms of it, even though Applicative
               -- is a superclass of Monad.
 
 instance Applicative Tree' where
-  pure x = undefined
+  pure x = todo
   (<*>)  = ap
 
 instance Applicative ((->) x) where
   -- pure :: a -> x -> a
-  pure = undefined
+  pure = todo
   -- (<*>) :: (x -> a -> b) -> (x -> a) -> (x -> b)
-  (<*>) = undefined
+  (<*>) = todo
 
 -- This last instance may seem a bit strange at first. How is it useful?
 -- Consider:
@@ -202,7 +202,7 @@ configFun :: (Config -> a)
           -> c
           -> (Config -> a -> b -> c -> d)
           -> Config -> d
-configFun x y z f = undefined
+configFun x y z f = todo
 
 -- Comparing this to how we write the following function may help:
 noConfigFun :: a
@@ -220,14 +220,17 @@ class Applicative m => Monad m where
   m >> n = m >>= \_ -> n
 
 ap :: Monad m => m (a -> b) -> m a -> m b
-ap = undefined
+ap = todo
 
 -- This one's a little bit tricky. Try the one for Tree' first if you want.
 instance Monad Tree where
-  t >>= f = undefined
+  t >>= f = todo
 
 instance Monad Tree' where
-  t >>= f = undefined
+  t >>= f = todo
 
 instance Monad ((->) x) where
-  f >>= g = undefined
+  f >>= g = todo
+
+todo :: a
+todo = undefined

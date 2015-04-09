@@ -24,3 +24,6 @@ instance Arbitrary a => Arbitrary (Poly.Tree' a) where
         ]
   shrink (Poly.Leaf' _)     = []
   shrink (Poly.Fork' t1 t2) = [t1, t2]
+
+todo :: a
+todo = undefined
