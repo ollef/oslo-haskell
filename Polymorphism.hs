@@ -10,7 +10,7 @@ module Polymorphism where
 -- This is non-standard and just to be able to redefine stuff on our own.
 import Prelude
   (Eq((==)), Ord((<=)), Show, Bool, Int, Integer, Maybe(Just, Nothing),
-  Num((+), (-)), (++), (&&), fromInteger, (.))
+  Num((+), (-)), (++), (&&), fromInteger, (.), undefined)
 
 -------------------------------------------------------------------------------
 -- * Ordinary *-kinded polymorphism
@@ -172,15 +172,11 @@ instance Applicative [] where
 -- first. Oftentimes there is a very limited set of things that you
 -- can do with what you've got.
 
-instance Applicative Tree where
+instance Applicative Tree' where
   pure x = todo
   (<*>)  = ap -- sometimes it's more straightforward to define Monad first and
               -- define the applicative in terms of it, even though Applicative
               -- is a superclass of Monad.
-
-instance Applicative Tree' where
-  pure x = todo
-  (<*>)  = ap
 
 instance Applicative ((->) x) where
   -- pure :: a -> x -> a
@@ -221,10 +217,6 @@ class Applicative m => Monad m where
 
 ap :: Monad m => m (a -> b) -> m a -> m b
 ap = todo
-
--- This one's a little bit tricky. Try the one for Tree' first if you want.
-instance Monad Tree where
-  t >>= f = todo
 
 instance Monad Tree' where
   t >>= f = todo
